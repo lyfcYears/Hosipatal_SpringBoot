@@ -1,19 +1,14 @@
 
 ## 问题
-post\get\postj\head\put等请求方式有什么用途？
-跨域请求问题(已经解决）
-
-
-
-##实现restful 请求。
-*第一步，在main.js中导入需要的组件，并且vue注册
-*第二步，编写对应的component,然后在appvue中使用router和axios进行处理，然后显示数据
-##npm常用的命令介绍
-'''
+* post\get\postj\head\put等请求方式有什么用途？
+* 跨域请求问题(已经解决）
+## 实现restful 请求
+* 第一步，在main.js中导入需要的组件，并且vue注册
+* 第二步，编写对应的component,然后在appvue中使用router和axios进行处理，然后显示数据
+## npm常用的命令介绍
 npm/cnpm install axios (-s)(-s / -g 表明是安装到该项目还是全局，如果安装在全局中，那么直接在package.json中写入依赖即可）该命令是安装对应的组件
 "axios": "^0.19.0" 如果依赖中没有这个 ，那么-g安装下 加下这个依赖即可
-'''
-##本次操作是要实现一种restful 风格的crud
+## 本次操作是要实现一种restful 风格的crud
 要使用的额外组件为：element-ui ui组件
 axios ajax pormist的异步请求的ajax方法，然后我们进行get/post(但是不能解决跨域访问，所以统一使用JSONP请求方式，并且post
 post请求需要设置为一般的表单请求方式。
