@@ -18,8 +18,10 @@ Vue.use(ElementUI);
 
 // axios 配置
 axios.defaults.timeout = 5000;
-axios.defaults.baseURL = 'http://localhost:6066';
+//添加了一行注解用来测试github的功能，更改了端口号为8886
+axios.defaults.baseURL = 'http://localhost:8886';
 Vue.prototype.axios = axios;
+
 
 
 
