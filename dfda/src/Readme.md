@@ -1,25 +1,23 @@
-// 实现restful 请求。
-第一步，在main.js中导入需要的组件，并且vue注册
-第二步，编写对应的component,然后在appvue中使用router和axios进行处理，然后显示数据
+
+## 问题
+post\get\postj\head\put等请求方式有什么用途？
+跨域请求问题(已经解决）
 
 
 
-
----------------
-npm常用的命令介绍
- npm/cnpm install axios (-s)(-s / -g 表明是安装到该项目还是全局，如果安装在全局中，那么直接在package.json中写入依赖即可）该命令是安装对应的组件
+##实现restful 请求。
+*第一步，在main.js中导入需要的组件，并且vue注册
+*第二步，编写对应的component,然后在appvue中使用router和axios进行处理，然后显示数据
+##npm常用的命令介绍
+'''
+npm/cnpm install axios (-s)(-s / -g 表明是安装到该项目还是全局，如果安装在全局中，那么直接在package.json中写入依赖即可）该命令是安装对应的组件
 "axios": "^0.19.0" 如果依赖中没有这个 ，那么-g安装下 加下这个依赖即可
-
-
-
-
--------------------------------------------------------------------------------------------------------------
-本次操作是要实现一种restful 风格的crud
+'''
+##本次操作是要实现一种restful 风格的crud
 要使用的额外组件为：element-ui ui组件
 axios ajax pormist的异步请求的ajax方法，然后我们进行get/post(但是不能解决跨域访问，所以统一使用JSONP请求方式，并且post
 post请求需要设置为一般的表单请求方式。
 使用router 路由机制使用单页面跳转，并且跳转的方式是RestFUl 形式。
-
 vuex是一种全局处理共享数据的一个组件，通常使用在二个不同的组件中进行数据绑定，数据可以进行同步
 filter 是method的一种过滤，常常可以结合管道进行使用，用来处理变量属性
 watch . create  method watch是一种监听器，可以用来监听组件的改变，create是一个vue中一个生命周期的一个方法，是已经说明
@@ -38,7 +36,3 @@ webpack是一种处理工具，能够把js不同的文件格式进行转换为js
 
 
 1. 定义一个组件 ，需要使用template <div>进行包裹
-
-//问题
-post\get\postj\head\put等请求方式有什么用途？
-组件应该如果定义
