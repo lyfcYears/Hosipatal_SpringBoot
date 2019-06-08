@@ -1,0 +1,18 @@
+
+
+spring:
+  #配置jdbc的链接数据
+  datasource:
+    driver: com.mysql.jdbc.Driver
+    url: jdbc:mysql://119.23.69.23:3306/his_hospital?characterEncoding=utf8&useSSL=true #
+    username: root
+    password: 69D76929e570 #数据库密码
+
+## 该配置节点为独立的节点，不能将这个配置放在spring的节点下，会导致配置无法被识别
+mybatis:
+  #m需要配置mapper 和 dao
+  mapper-locations: classpath:mapping/*.xml  #一定要对应mapper映射xml文件的所在路径
+  type-aliases-package: com.hosipatal.entity  # 对应实体类的路径包和子包均可
+
+
+
