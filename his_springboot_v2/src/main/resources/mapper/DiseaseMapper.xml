@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hospital.mapper.DiseaseMapper">
-  <resultMap id="BaseResultMap" type="com.hospital.model.od.Disease">
+  <resultMap id="BaseResultMap" type="com.hospital.model.Disease">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="disease_code" jdbcType="VARCHAR" property="diseaseCode" />
     <result column="disease_name" jdbcType="VARCHAR" property="diseaseName" />
@@ -69,7 +69,7 @@
   <sql id="Base_Column_List">
     id, disease_code, disease_name, disease_icd, dise_category_id
   </sql>
-  <select id="selectByExample" parameterType="com.hospital.model.od.DiseaseExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.hospital.model.DiseaseExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -93,24 +93,27 @@
     delete from disease
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.hospital.model.od.DiseaseExample">
+  <delete id="deleteByExample" parameterType="com.hospital.model.DiseaseExample">
     delete from disease
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.hospital.model.od.Disease">
-    insert into disease (id, disease_code, disease_name, 
-      disease_icd, dise_category_id)
-    values (#{id,jdbcType=INTEGER}, #{diseaseCode,jdbcType=VARCHAR}, #{diseaseName,jdbcType=VARCHAR}, 
-      #{diseaseIcd,jdbcType=VARCHAR}, #{diseCategoryId,jdbcType=INTEGER})
+  <insert id="insert" parameterType="com.hospital.model.Disease">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into disease (disease_code, disease_name, disease_icd, 
+      dise_category_id)
+    values (#{diseaseCode,jdbcType=VARCHAR}, #{diseaseName,jdbcType=VARCHAR}, #{diseaseIcd,jdbcType=VARCHAR}, 
+      #{diseCategoryId,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.hospital.model.od.Disease">
+  <insert id="insertSelective" parameterType="com.hospital.model.Disease">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into disease
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
       <if test="diseaseCode != null">
         disease_code,
       </if>
@@ -125,9 +128,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
-      </if>
       <if test="diseaseCode != null">
         #{diseaseCode,jdbcType=VARCHAR},
       </if>
@@ -142,7 +142,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.hospital.model.od.DiseaseExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.hospital.model.DiseaseExample" resultType="java.lang.Long">
     select count(*) from disease
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -182,7 +182,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.hospital.model.od.Disease">
+  <update id="updateByPrimaryKeySelective" parameterType="com.hospital.model.Disease">
     update disease
     <set>
       <if test="diseaseCode != null">
@@ -200,7 +200,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.hospital.model.od.Disease">
+  <update id="updateByPrimaryKey" parameterType="com.hospital.model.Disease">
     update disease
     set disease_code = #{diseaseCode,jdbcType=VARCHAR},
       disease_name = #{diseaseName,jdbcType=VARCHAR},

@@ -1,12 +1,10 @@
 package com.hospital.mapper;
 
-import com.hospital.model.admin.User;
-import com.hospital.model.admin.UserExample;
+import com.hospital.model.User;
+import com.hospital.model.UserExample;
 import java.util.List;
-
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-@Mapper
+
 public interface UserMapper {
     long countByExample(UserExample example);
 

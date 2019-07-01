@@ -1,12 +1,10 @@
 package com.hospital.mapper;
 
-import com.hospital.model.sf.RegistrationLevel;
-import com.hospital.model.sf.RegistrationLevelExample;
+import com.hospital.model.RegistrationLevel;
+import com.hospital.model.RegistrationLevelExample;
 import java.util.List;
-
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-@Mapper
+
 public interface RegistrationLevelMapper {
     long countByExample(RegistrationLevelExample example);
 

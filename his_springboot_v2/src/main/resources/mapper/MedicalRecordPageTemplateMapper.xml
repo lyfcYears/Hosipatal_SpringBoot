@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hospital.mapper.MedicalRecordPageTemplateMapper">
-  <resultMap id="BaseResultMap" type="com.hospital.model.od.MedicalRecordPageTemplate">
+  <resultMap id="BaseResultMap" type="com.hospital.model.MedicalRecordPageTemplate">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="template_name" jdbcType="VARCHAR" property="templateName" />
     <result column="department_no" jdbcType="INTEGER" property="departmentNo" />
@@ -77,7 +77,7 @@
     id, template_name, department_no, outpatient_doctor_no, chief_complaint, history_present_illness, 
     history_illness, health_examine, assist_examine, diagnosi_nos, create_time, state
   </sql>
-  <select id="selectByExample" parameterType="com.hospital.model.od.MedicalRecordPageTemplateExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.hospital.model.MedicalRecordPageTemplateExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -101,30 +101,33 @@
     delete from medical_record_page_template
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.hospital.model.od.MedicalRecordPageTemplateExample">
+  <delete id="deleteByExample" parameterType="com.hospital.model.MedicalRecordPageTemplateExample">
     delete from medical_record_page_template
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.hospital.model.od.MedicalRecordPageTemplate">
-    insert into medical_record_page_template (id, template_name, department_no, 
-      outpatient_doctor_no, chief_complaint, history_present_illness, 
+  <insert id="insert" parameterType="com.hospital.model.MedicalRecordPageTemplate">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into medical_record_page_template (template_name, department_no, outpatient_doctor_no, 
+      chief_complaint, history_present_illness, 
       history_illness, health_examine, assist_examine, 
       diagnosi_nos, create_time, state
       )
-    values (#{id,jdbcType=INTEGER}, #{templateName,jdbcType=VARCHAR}, #{departmentNo,jdbcType=INTEGER}, 
-      #{outpatientDoctorNo,jdbcType=INTEGER}, #{chiefComplaint,jdbcType=VARCHAR}, #{historyPresentIllness,jdbcType=VARCHAR}, 
+    values (#{templateName,jdbcType=VARCHAR}, #{departmentNo,jdbcType=INTEGER}, #{outpatientDoctorNo,jdbcType=INTEGER}, 
+      #{chiefComplaint,jdbcType=VARCHAR}, #{historyPresentIllness,jdbcType=VARCHAR}, 
       #{historyIllness,jdbcType=VARCHAR}, #{healthExamine,jdbcType=VARCHAR}, #{assistExamine,jdbcType=VARCHAR}, 
       #{diagnosiNos,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{state,jdbcType=CHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.hospital.model.od.MedicalRecordPageTemplate">
+  <insert id="insertSelective" parameterType="com.hospital.model.MedicalRecordPageTemplate">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into medical_record_page_template
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
       <if test="templateName != null">
         template_name,
       </if>
@@ -160,9 +163,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
-      </if>
       <if test="templateName != null">
         #{templateName,jdbcType=VARCHAR},
       </if>
@@ -198,7 +198,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.hospital.model.od.MedicalRecordPageTemplateExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.hospital.model.MedicalRecordPageTemplateExample" resultType="java.lang.Long">
     select count(*) from medical_record_page_template
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -266,7 +266,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.hospital.model.od.MedicalRecordPageTemplate">
+  <update id="updateByPrimaryKeySelective" parameterType="com.hospital.model.MedicalRecordPageTemplate">
     update medical_record_page_template
     <set>
       <if test="templateName != null">
@@ -305,7 +305,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.hospital.model.od.MedicalRecordPageTemplate">
+  <update id="updateByPrimaryKey" parameterType="com.hospital.model.MedicalRecordPageTemplate">
     update medical_record_page_template
     set template_name = #{templateName,jdbcType=VARCHAR},
       department_no = #{departmentNo,jdbcType=INTEGER},

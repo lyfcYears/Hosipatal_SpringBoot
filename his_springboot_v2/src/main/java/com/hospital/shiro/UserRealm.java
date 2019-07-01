@@ -11,8 +11,8 @@ package com.hospital.shiro;
  **/
 
 
-import com.hospital.model.admin.User;
-import com.hospital.service.UserServer;
+import com.hospital.model.User;
+import com.hospital.service.od.UserServer;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -26,8 +26,6 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.List;
 
 /**
  * @Description
@@ -48,7 +46,9 @@ public class UserRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws RuntimeException {
+
         UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
+        System.out.println("token的内容："+token);
         if(token.getUsername() == null)
             return null;
         else {
@@ -63,8 +63,10 @@ public class UserRealm extends AuthorizingRealm {
             SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(
                     sysUser, sysUser.getUserpassword().toCharArray(),
                     this.getName());
+
             if (simpleAuthenticationInfo == null)
                 LOGGER.info(token.getUsername() + "(用户)尝试登陆,输入的无效密码为:" + token.getPassword());
+
             return simpleAuthenticationInfo;
         }
     }

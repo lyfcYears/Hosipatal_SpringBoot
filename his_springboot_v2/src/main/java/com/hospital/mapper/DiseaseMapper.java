@@ -1,7 +1,7 @@
 package com.hospital.mapper;
 
-import com.hospital.model.od.Disease;
-import com.hospital.model.od.DiseaseExample;
+import com.hospital.model.Disease;
+import com.hospital.model.DiseaseExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 

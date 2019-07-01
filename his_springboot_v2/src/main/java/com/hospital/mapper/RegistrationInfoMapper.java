@@ -1,12 +1,10 @@
 package com.hospital.mapper;
 
-import com.hospital.model.sf.RegistrationInfo;
-import com.hospital.model.sf.RegistrationInfoExample;
+import com.hospital.model.RegistrationInfo;
+import com.hospital.model.RegistrationInfoExample;
 import java.util.List;
-
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-@Mapper
+
 public interface RegistrationInfoMapper {
     long countByExample(RegistrationInfoExample example);
 
@@ -29,7 +27,4 @@ public interface RegistrationInfoMapper {
     int updateByPrimaryKeySelective(RegistrationInfo record);
 
     int updateByPrimaryKey(RegistrationInfo record);
-
-
-
 }

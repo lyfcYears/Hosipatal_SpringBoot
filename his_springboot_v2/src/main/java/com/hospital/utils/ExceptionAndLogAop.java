@@ -40,27 +40,27 @@ public class ExceptionAndLogAop {
         if(p.getArgs() != null)
             logger.info("执行了"+p.getSignature().getName()+"方法,传入的参数为"+ Arrays.toString(p.getArgs()));
     }
-    /**
-     * @Description 使用环绕通知进行异常处理并且返回错误的code
-     * @Date 11:07 2019/6/12
-     * @Param
-     * @return
-     **/
-    @Around("point()")
-    public Result serviceAOP(ProceedingJoinPoint pjp) {
-        Result newResultVo = null;
-        try {
-            newResultVo = (Result)pjp.proceed();
-            // 可以处理自定义异常
-        } catch (Throwable e) {
-            logger.info("业务异常:" +pjp.getSignature().getName()+"方法出现了异常为:"+ e.getMessage());
-//            业务异常:getMedicalRecordPageByPatientBLH方法出现了异常为:Index: 0, Size: 0
-            newResultVo = new Result(ResultCode.ERROR_ALL);
-        }
-
-        return newResultVo;
-    }
-
+//    /**
+//     * @Description 使用环绕通知进行异常处理并且返回错误的code
+//     * @Date 11:07 2019/6/12
+//     * @Param
+//     * @return
+//     **/
+//    @Around("point()")
+//    public Result serviceAOP(ProceedingJoinPoint pjp) {
+//        Result newResultVo = null;
+//        try {
+//            newResultVo = (Result)pjp.proceed();
+//            // 可以处理自定义异常
+//        } catch (Throwable e) {
+//            logger.info("业务异常:" +pjp.getSignature().getName()+"方法出现了异常为:"+ e.getMessage());
+////            业务异常:getMedicalRecordPageByPatientBLH方法出现了异常为:Index: 0, Size: 0
+//            newResultVo = new Result(ResultCode.ERROR_ALL);
+//        }
+//
+//        return newResultVo;
+//    }
+//
 
 
 

@@ -1,12 +1,10 @@
 package com.hospital.mapper;
 
-import com.hospital.model.sf.RegistrationFee;
-import com.hospital.model.sf.RegistrationFeeExample;
+import com.hospital.model.RegistrationFee;
+import com.hospital.model.RegistrationFeeExample;
 import java.util.List;
-
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-@Mapper
+
 public interface RegistrationFeeMapper {
     long countByExample(RegistrationFeeExample example);
 

@@ -1,6 +1,5 @@
 package com.hospital.controller;
 
-import com.hospital.model.TestValidated;
 import com.hospital.model.od.UserAOP;
 import com.hospital.utils.Result;
 import com.hospital.utils.ResultCode;
@@ -26,9 +25,5 @@ import java.util.List;
 @RestController
 public class TestController {
 
-    @RequestMapping(value = "/testValidate/{name}/{pass}",method = RequestMethod.GET)
-    public Result findUserByName(@Validated @PathVariable TestValidated t){
 
-        return new Result(ResultCode.SUCCESS);
-    }
 }

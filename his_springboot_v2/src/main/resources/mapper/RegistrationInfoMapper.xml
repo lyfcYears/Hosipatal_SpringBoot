@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hospital.mapper.RegistrationInfoMapper">
-
-  <resultMap id="BaseResultMap" type="com.hospital.model.sf.RegistrationInfo">
+  <resultMap id="BaseResultMap" type="com.hospital.model.RegistrationInfo">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="medical_record" jdbcType="CHAR" property="medicalRecord" />
     <result column="registration_fee_no" jdbcType="CHAR" property="registrationFeeNo" />
@@ -22,16 +21,6 @@
     <result column="blank2" jdbcType="VARCHAR" property="blank2" />
     <result column="blank3" jdbcType="VARCHAR" property="blank3" />
   </resultMap>
-
-  <!--<resultMap id="waitPatient" type="com.hospital.model.odVueObject.Od_Patient">-->
-    <!--<id column="id" jdbcType="INTEGER" property="id" />-->
-    <!--<result column="medical_record" jdbcType="CHAR" property="blh" />-->
-    <!--<result column="patient_name" jdbcType="VARCHAR" property="name" />-->
-    <!--<result column="patient_age" jdbcType="INTEGER" property="age" />-->
-    <!--<result column="patient_sex" jdbcType="CHAR" property="gener" />-->
-    <!--<result column="is_seen_docator" jdbcType="CHAR" property="isSeeDoctor" />-->
-  <!--</resultMap>-->
-
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -91,11 +80,11 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, medical_record, registration_fee_no, patient_name, patient_age, patient_sex,
-    patient_card, patient_address, outpatient_doctor_no, outpatient_doctor_name, department_no,
+    id, medical_record, registration_fee_no, patient_name, patient_age, patient_sex, 
+    patient_card, patient_address, outpatient_doctor_no, outpatient_doctor_name, department_no, 
     department_name, is_seen_docator, create_time, state, blank1, blank2, blank3
   </sql>
-  <select id="selectByExample" parameterType="com.hospital.model.sf.RegistrationInfoExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.hospital.model.RegistrationInfoExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -110,7 +99,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select
+    select 
     <include refid="Base_Column_List" />
     from registration_info
     where id = #{id,jdbcType=INTEGER}
@@ -119,34 +108,35 @@
     delete from registration_info
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.hospital.model.sf.RegistrationInfoExample">
+  <delete id="deleteByExample" parameterType="com.hospital.model.RegistrationInfoExample">
     delete from registration_info
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.hospital.model.sf.RegistrationInfo">
-    insert into registration_info (id, medical_record, registration_fee_no,
-      patient_name, patient_age, patient_sex,
-      patient_card, patient_address, outpatient_doctor_no,
-      outpatient_doctor_name, department_no, department_name,
-      is_seen_docator, create_time, state,
-      blank1, blank2, blank3
-      )
-    values (#{id,jdbcType=INTEGER}, #{medicalRecord,jdbcType=CHAR}, #{registrationFeeNo,jdbcType=CHAR},
-      #{patientName,jdbcType=VARCHAR}, #{patientAge,jdbcType=INTEGER}, #{patientSex,jdbcType=CHAR},
-      #{patientCard,jdbcType=CHAR}, #{patientAddress,jdbcType=VARCHAR}, #{outpatientDoctorNo,jdbcType=INTEGER},
-      #{outpatientDoctorName,jdbcType=VARCHAR}, #{departmentNo,jdbcType=INTEGER}, #{departmentName,jdbcType=VARCHAR},
-      #{isSeenDocator,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}, #{state,jdbcType=CHAR},
-      #{blank1,jdbcType=VARCHAR}, #{blank2,jdbcType=VARCHAR}, #{blank3,jdbcType=VARCHAR}
-      )
+  <insert id="insert" parameterType="com.hospital.model.RegistrationInfo">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into registration_info (medical_record, registration_fee_no, patient_name, 
+      patient_age, patient_sex, patient_card, 
+      patient_address, outpatient_doctor_no, outpatient_doctor_name, 
+      department_no, department_name, is_seen_docator, 
+      create_time, state, blank1, 
+      blank2, blank3)
+    values (#{medicalRecord,jdbcType=CHAR}, #{registrationFeeNo,jdbcType=CHAR}, #{patientName,jdbcType=VARCHAR}, 
+      #{patientAge,jdbcType=INTEGER}, #{patientSex,jdbcType=CHAR}, #{patientCard,jdbcType=CHAR}, 
+      #{patientAddress,jdbcType=VARCHAR}, #{outpatientDoctorNo,jdbcType=INTEGER}, #{outpatientDoctorName,jdbcType=VARCHAR}, 
+      #{departmentNo,jdbcType=INTEGER}, #{departmentName,jdbcType=VARCHAR}, #{isSeenDocator,jdbcType=CHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{state,jdbcType=CHAR}, #{blank1,jdbcType=VARCHAR}, 
+      #{blank2,jdbcType=VARCHAR}, #{blank3,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.hospital.model.sf.RegistrationInfo">
+  <insert id="insertSelective" parameterType="com.hospital.model.RegistrationInfo">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into registration_info
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
       <if test="medicalRecord != null">
         medical_record,
       </if>
@@ -200,9 +190,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
-      </if>
       <if test="medicalRecord != null">
         #{medicalRecord,jdbcType=CHAR},
       </if>
@@ -256,7 +243,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.hospital.model.sf.RegistrationInfoExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.hospital.model.RegistrationInfoExample" resultType="java.lang.Long">
     select count(*) from registration_info
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -348,7 +335,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.hospital.model.sf.RegistrationInfo">
+  <update id="updateByPrimaryKeySelective" parameterType="com.hospital.model.RegistrationInfo">
     update registration_info
     <set>
       <if test="medicalRecord != null">
@@ -405,7 +392,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.hospital.model.sf.RegistrationInfo">
+  <update id="updateByPrimaryKey" parameterType="com.hospital.model.RegistrationInfo">
     update registration_info
     set medical_record = #{medicalRecord,jdbcType=CHAR},
       registration_fee_no = #{registrationFeeNo,jdbcType=CHAR},
